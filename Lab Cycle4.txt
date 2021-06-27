@@ -1,0 +1,367 @@
+PROGRAM 1
+
+
+<html>
+<head>
+<title>Odd or Even</title>
+</head>
+<body>
+<form class="" action="phpq1.php" method="get">
+<label for="num">Enter a Number</label>
+<input type="text" id="num" name="num" required>
+<input type="submit" name="" value="Submit">
+</form>
+</body>
+</html>
+phpq1.php
+<?php
+if($_GET)
+{
+$num=$_GET['num'];
+if(($num%2)==0)
+echo "$num is Even";
+else
+echo "$num is Odd";
+}
+?>
+
+PROGRAM 2
+
+
+< html>
+<head>
+<title>Factorial of a Number</title>
+</head>
+<body>
+<form class="" action="phplab2.php" method="post">
+<label for="num">Enter a Number</label>
+<input type="text" id="num" name="num" required>
+<input type="submit" name="" value="Submit">
+</form>
+</body>
+</html>
+Phplab2.php
+<?php 
+if($_POST)
+{
+$fact=1;
+$num=$_POST['num']; for($x=$num;$x>=1;$x--)
+$fact=$fact*$x;
+echo "Factorail of $num= $fact";
+}
+?>
+
+
+PROGRAM 3
+
+
+<html >
+<head>
+<title>Gathering Info</title>
+</head>
+<body bgcolor="Azure">
+<form class="" action="phplab3.php" method="post">
+<h2 align="center">***** Enter Details *****</h2>
+<table border="2" align="center">
+<tr>
+<td><label for="name">*Name : </label> </td>
+<td><input type="text" id="name" name="name1" required> </td>
+</tr>
+<tr>
+<td><label for="email">*Email Id : </label> </td>
+<td><input type="text" id="email" name="email" value="" required> </td>
+</tr>
+<tr>
+<td><label for="address">*Address : </label> </td>
+<td><input type="text" id="address" name="address" value="" required> </td>
+</tr>
+<tr>
+<td> <label for="gender">Gender : </label> </td>
+<td>P a g e | 48
+<input type="radio" id="male" name="gender" value="Male" >
+<label for="male">Male</label><br>
+<input type="radio" id="female" name="gender" value="Female">
+<label for="female">Female</label><br>
+<input type="radio" id="other" name="gender" value="Other">
+<label for="other">Other</label>
+</td>
+</tr>
+<tr>
+<td><label for="dob">Date of Birth : </label> </td>
+<td><input type="date" id="dob" name="dob" value=""> </td>
+</tr>
+<tr>
+<td><label for="phn">*Contact Number : </label> </td>
+<td><input type="text" id="phn" name="num" value="" required> </td>
+</tr>
+<tr>
+<td colspan="2"> <input type="submit" name="button" value="Submit"> </td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+Phplab3.php
+<html>
+<head>
+<style > table{ width:50%;
+background-color: AntiqueWhite;
+}
+</style>
+<title>Details</title>
+</head>P a g e | 49
+<body bgcolor="Black">
+<h2 align="center" style="color:white"> <u>Details of <?php echo $_REQUEST['name1'];
+?></u> </h2>
+<?php
+if(isset($_REQUEST['button']))
+{
+$name=$_REQUEST['name1'];
+$mail=$_REQUEST['email'];
+$address=$_REQUEST['address'];
+$gender=$_REQUEST['gender'];
+$dob=$_REQUEST['dob'];
+$num=$_REQUEST['num'];
+} ?>
+<table align="center" border="2">
+<tr>
+<td>Name </td>
+<td> <?php echo $name ?> </td>
+</tr>
+<tr>
+<td>Address</td>
+<td> <?php echo $address ?> </td>
+</tr>
+<tr>
+<td>Email Id</td>
+<td> <?php echo $mail ?> </td>
+</tr>
+<tr>
+<td>Gender</td>
+<td> <?php echo $gender ?> </td>
+</tr>
+<tr>
+<td>Date of Birth</td>P
+a
+g
+e | 50
+<td> <?php echo $dob ?> </td>
+</tr>
+<tr>
+<td>Contact Number</td>
+<td> <?php echo $num ?> </td>
+</tr>
+</table>
+</body>
+</html>
+
+
+PROGRAM 4
+
+
+
+<html>
+<head>
+<title>Book details</title>
+<body>
+<h1 align="center">BOOK DETAILS</h1>
+<center>
+<form method="POST" action="phplab4-1.php">
+<table>
+<tr>
+<td>Book No</td><td><input type="text" name="bno"></td>
+</tr>
+<tr>
+<td>Book Name</td><td><input type="text" name="bname"></td>
+</tr>
+<tr>
+<td>Edition</td><td><input type="text" name="edtn"></td>
+</tr>
+<tr>
+<td>Publisher</td><td><input type="text" name="publ"></td>
+</tr>
+<tr>
+<td colspan="2" align="center"><input type="submit" value="Submit"></td>
+</tr>P a g e | 53
+</table>
+</form>
+</center>
+</body>
+</html>
+Phplab4-2.php
+<?php
+$sname="117.232.108.36";
+$uname="mca2023";
+$pswd="password23";
+$dbname="dbmca2023";
+//connection
+$conn=new mysqli($sname,$uname,$pswd,$dbname);
+//check connection if($conn->connect_error){
+die("Connection failed: ">$conn->connect_error);
+}
+$bno=$_POST['bno'];
+$bname=$_POST['bname'];
+$edtn=$_POST['edtn'];
+$publ=$_POST['publ'];
+$sql=mysqli_query($conn,"insert into book_details values($bno,'$bname','$edtn','$publ')");
+$query=mysqli_query($conn,"select * from book_details");
+?>
+<html>
+<body>
+<h1>Book Details</h1>
+<table border="2">
+<tr>
+<th>Book No</th>
+<th>Book Name</th>
+<th>Edition</th>
+<th>Publisher</th>P a g e | 54
+</tr>
+<?php while($row=mysqli_fetch_assoc($query))
+{
+echo "<tr>";
+echo "<td>".$row['book_no']."</td>";
+echo "<td>".$row['title']."</td>";
+echo "<td>".$row['edition']."</td>"; echo "<td>".$row['publisher']."</td>"; echo "</tr>";
+}
+?>
+</table>
+</body>
+</html>
+
+
+PROGRAM 5
+
+
+<html>
+<head>
+<title>Login Form</title>
+</head>
+<body>
+<h1 align=center>Log in </h1>
+<center>
+<form method="POST" action="phplab5-welcome.php">
+<table>
+<tr>
+<td>User Name </td><td><input type="text" name="usr"></td>
+</tr>
+<tr>
+<td>Passward </td><td><input type="password" name="pswd"></td>
+<tr>
+<tr>
+<td colspan="2" align="center"><input type="Submit" name="submit" value="Log in"></td>
+<tr>
+</table>P a g e | 57
+</form>
+</center>
+<a href="phplab5-set.php">Set User name & Password</a>
+</body>
+</html>
+Phplab5-2.php
+<?php session_start();
+$sname="117.232.108.36";
+$uname="mca2023";
+$pswd="password23";
+$dbname="dbmca2023";
+//connection
+$conn=new mysqli($sname,$uname,$pswd,$dbname);
+//check connection if($conn->connect_error){
+die("Connection failed: ">$conn->connect_error);
+}
+if(isset($_POST['btn']))
+{
+$usr=$_POST['usr'];
+$pswd=$_POST['pswd'];
+$sql=mysqli_query($conn,"select * from login where username='$usr'"); if(mysqli_num_rows($sql)>0)
+{
+echo "<script>alert('username already Exists!!!!!!!!!!!');</script>"; echo '<script type="text/javascript">
+location.replace("phplab5-2.php");
+</script>';
+}
+else
+{
+if(mysqli_query($conn,"insert into login values('$usr','$pswd')"))
+{
+echo "<script>alert('Login ');</script>";
+echo '<script type="text/javascript"> location.replace("php5lab-1.php");
+</script>';P a g e | 58
+}
+}
+}
+if(isset($_POST['submit']))
+{
+$usr=$_POST['usr'];
+$pswd=$_POST['pswd'];
+$sql=mysqli_query($conn,"select * from login where username='$usr' and password='$pswd'"); 
+if(mysqli_num_rows($sql)>0)
+{
+$_SESSION['login_user'] = $usr; header("location: php5-welcome.php");
+}
+else
+{
+echo "<script>alert('Incorrect Username and Password!!!!!!!!!!!');</script>"; echo '<script type="text/javascript">
+location.replace("phplab5-1.php");
+</script>';
+}
+$sql=mysqli_query($conn,"select * from login where password='$pswd'"); if(mysqli_num_rows($sql)>0)
+{
+echo "<script>alert('Incorrect Username!!!!!!!!!!!');</script>"; echo '<script type="text/javascript">
+location.replace("php5-1.php ");
+</script>';
+}
+else
+{
+$sql=mysqli_query($conn,"select * from login where username='$usr'"); if(mysqli_num_rows($sql)>0)
+{
+echo "<script>alert('Incorrect Password!!!!!!!!!!!');</script>"; echo '<script type="text/javascript"> location.replace("phplab5-1.php ");
+</script>';
+}
+}
+}P a g e | 59
+?>
+Phplab5-welcome.php
+<?php session_start();
+$user=$_SESSION['login_user'];
+?>
+<html>
+<body>
+<h1 align="center">WELCOME</h1>
+<h1 align="center"><?php echo $user; ?></h1>
+</body>
+</html>
+Php5-set.php
+<html>
+<head>
+<title>Login Form</title>
+</head>
+<body>
+<h1 align=center>Sign Up </h1>
+<center>
+<form method="POST" action="phplab5-2.php">
+<table>
+<tr>
+<td>User Name </td><td><input type="text" name="usr"></td>
+</tr>
+<tr>
+<td>Password </td><td><input type="password" name="pswd"></td>
+<tr>
+<tr>
+<td colspan="2" align="center"><input type="submit" name="btn" value="Log in"></td>P
+a
+g
+e | 60
+<tr>
+</table>
+</form>
+</center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

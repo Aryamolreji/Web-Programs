@@ -1,0 +1,201 @@
+PROGRAM 2
+
+
+mysql> create database Company;
+Query OK, 1 row affected (0.03 sec)
+mysql> show databases;
++--------------------+
+| Database |
++--------------------+
+| arya |
+| company |
+| information_schema |
+| mysql |
+| new |
+| performance_schema |
+| phpmyadmin |
+| stud |
+| student |
+| test |
++--------------------+
+10 rows in set (0.00 sec)
+mysql> use Company;
+Database changed
+mysql> create table Department(Deptid Integer Primary Key,Deptname varchar(10) not null unique);
+Query OK, 0 rows affected (1.18 sec)
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| department |
++-------------------+
+1 row in set (0.24 sec)
+mysql> create table Employees(Empid Integer Primary Key,Ename varchar(20) not null,Deptid Integer,foreign key(Deptid) references Department(Deptid) on delete cascade on update cascade);
+Query OK, 0 rows affected (2.59 sec)
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| department |
+| employees |
++-------------------+
+2 rows in set (0.00 sec)P a g e | 33
+mysql> desc Department;
++----------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Deptid | int(11) | NO | PRI | NULL | |
+| Deptname | varchar(10) | NO | UNI | NULL | |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (4.72 sec)
+mysql> desc Employees;
++--------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Empid | int(11) | NO | PRI | NULL | |
+| Ename | varchar(20) | NO | | NULL | |
+| Deptid | int(11) | YES | MUL | NULL | |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.06 sec)
+mysql> alter table Employees add emailid varchar(40),add salary integer,add remarks varchar(45);
+Query OK, 0 rows affected (1.25 sec)
+Records: 0 Duplicates: 0 Warnings: 0
+mysql> desc Employees;
++---------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Empid | int(11) | NO | PRI | NULL | |
+| Ename | varchar(20) | NO | | NULL | |
+| Deptid | int(11) | YES | MUL | NULL | |
+| emailid | varchar(40) | YES | | NULL | |
+| salary | int(11) | YES | | NULL | |
+| remarks | varchar(45) | YES | | NULL | |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.06 sec)
+mysql> alter table Employees add unique(emailid);
+Query OK, 0 rows affected (0.36 sec)
+Records: 0 Duplicates: 0 Warnings: 0
+mysql> alter table Employees add constraint salary_check check (salary>=5000);
+Query OK, 0 rows affected (2.10 sec)
+Records: 0 Duplicates: 0 Warnings: 0
+mysql> alter table Employees drop column remarks;
+Query OK, 0 rows affected (0.41 sec)
+Records: 0 Duplicates: 0 Warnings: 0
+mysql> desc Employees;
++---------+-------------+------+-----+---------+-------+P a g e | 34
+| Field | Type | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Empid | int(11) | NO | PRI | NULL | |
+| Ename | varchar(20) | NO | | NULL | |
+| Deptid | int(11) | YES | MUL | NULL | |
+| emailid | varchar(40) | YES | UNI | NULL | |
+| salary | int(11) | YES | | NULL | |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.09 sec)
+mysql> desc Department;
++----------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Deptid | int(11) | NO | PRI | NULL | |
+| Deptname | varchar(10) | NO | UNI | NULL | |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.10 sec)
+mysql> insert into Department values(101,'Production'),(102,'Sales'),(103,'Marketing'),(104,'Tesing'),(201,'Maintenance');
+Query OK, 5 rows affected, 1 warning (0.51 sec)
+Records: 5 Duplicates: 0 Warnings: 1
+mysql> insert into Employees values(1221,'Arya',104,'arya@gmail.com',7000),(1224,'Ammu',103,'ammu@gmail.c
+om',5000),(1331,'Arvind',201,'aravi@gmail.com',10000),(1441,'Dev',101,'Dev@gmail.com',6000),(1551,
+'Arun',102,'arun@gmail.com',8000);
+Query OK, 5 rows affected (0.13 sec)
+Records: 5 Duplicates: 0 Warnings: 0
+mysql> select * from Department;
++--------+------------+
+| Deptid | Deptname |
++--------+------------+
+| 201 | Maintenanc |
+| 103 | Marketing |
+| 101 | Production |
+| 102 | Sales |
+| 104 | Testing |
++--------+------------+
+5 rows in set (0.05 sec)P a g e | 35
+mysql> select * from Employees;
++-------+---------+--------+-----------------+--------+
+| Empid | Ename | Deptid | emailid | salary |
++-------+---------+--------+-----------------+--------+
+| 1221 | Arya | 104 | arya@gmail.com | 7000 |
+| 1224 | Ammu | 103 | ammu@gmail.com | 5000 |
+| 1331 | Aravind | 201 | aravi@gmail.com | 10000 |
+| 1441 | Dev | 101 | Dev@gmail.com | 6000 |
+| 1551 | Arun | 102 | arun@gmail.com | 8000 |
++-------+---------+--------+-----------------+--------+
+5 rows in set (0.00 sec)
+mysql> select Ename from employees where Deptid=101;
++-------+
+| Ename |
++-------+
+| Dev |
++-------+
+1 row in set (0.17 sec)
+mysql> select Ename,salary from Employees;
++---------+--------+
+| Ename | salary |
++---------+--------+
+| Arya | 7000 |
+| Ammu | 5000 |
+| Aravind | 10000 |
+| Dev | 6000 |
+| Arun | 8000 |
++---------+--------+
+5 rows in set (0.00 sec)
+mysql> update Employees set salary=50000 where EmpId=1221;
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1 Changed: 1 Warnings: 0
+mysql> select * from Employees;
++-------+---------+--------+-----------------+--------+
+| Empid | Ename | Deptid | emailid | salary |
++-------+---------+--------+-----------------+--------+
+| 1221 | Arya | 104 | arya@gmail.com | 50000 |
+| 1224 | Ammu | 103 | ammu@gmail.com | 5000 |
+| 1331 | Aravind | 201 | aravi@gmail.com | 10000 |
+| 1441 | Dev | 101 | Dev@gmail.com | 6000 |
+| 1551 | Arun | 102 | arun@gmail.com | 8000 |
++-------+---------+--------+-----------------+--------+P
+a
+g
+e | 36
+5 rows in set (0.00 sec)
+mysql> delete from Employees where Empid=1331;
+Query OK, 1 row affected (0.15 sec)
+mysql> select * from Employees; +-------+-------+--------+----------------
++--------
++
+| Empid | Ename | Deptid | emailid | salary | +-------+-------+--------+----------------+--------
++
+| 1221 | Arya | 104 | arya@gmail.com | 50000 |
+| 1224 | Ammu | 103 | ammu@gmail.com | 5000 |
+| 1441 | Dev | 101 | Dev@gmail.com | 6000 |
+| 1551 | Arun | 102 | arun@gmail.com | 8000 | +-------+-------+--------+----------------+--------
++
+4 rows in set (0.00 sec)
+mysql> select Ename from Employees where salary=13000;
+Empty set (0.00 sec)
+mysql> delete from Department where Deptid=201;
+Query OK, 1 row affected (0.08 sec)
+mysql> select * from Department; +--------+------------+
+| Deptid | Deptname | +--------+------------+
+| 103 | Marketing |
+| 101 | Production |
+| 102 | Sales |
+| 104 | Testing | +--------+------------
++
+4 rows in set (0.00 sec)
+mysql> select * from Employees order by salary asc; +-------+-------+--------+----------------+--------+
+| Empid | Ename | Deptid | emailid | salary | +-------+-------+--------+----------------+--------
++
+| 1224 | Ammu | 103 | ammu@gmail.com | 5000 |
+| 1441 | Dev | 101 | Dev@gmail.com | 6000 |
+| 1551 | Arun | 102 | arun@gmail.com | 8000 |
+| 1221 | Arya | 104 | arya@gmail.com | 50000 | +-------+-------+--------+----------------+--------+
+4 rows in set (0.05 sec)
+mysql>
